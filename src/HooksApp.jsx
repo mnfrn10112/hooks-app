@@ -1,5 +1,8 @@
+
 export const HooksApp = () => {
   return (
-    <div>HooksApp</div>
-  )
-}
+    <>
+      <div>HooksApp</div>
+    </>
+  );
+};
