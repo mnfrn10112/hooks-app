@@ -1,21 +1,25 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { TodoAdd, TodoList, todoReducer } from "./";
 
 const initialState = [
-    {
-        id: new Date().getTime(),
-        description: 'Recolectar la priedra del alma',
-        done: false,
-    },
-    {
-        id: new Date().getTime() + 10,
-        description: 'Recolectar la priedra del poder',
-        done: false,
-    },
+    // {
+    //     id: new Date().getTime(),
+    //     description: 'Recolectar la priedra del alma',
+    //     done: false,
+    // },
+    // {
+    //     id: new Date().getTime() + 10,
+    //     description: 'Recolectar la priedra del poder',
+    //     done: false,
+    // },
 ];
 
+const init = () => {
+    return JSON.parse(localStorage.getItem('todos')) || [];
+};
+
 export const TodoApp = () => {
-    const [todos, dispatch] = useReducer(todoReducer, initialState);
+    const [todos, dispatch] = useReducer(todoReducer, initialState, init);
 
     const handelNewTodo = (todo) => {
         console.log(todo);
@@ -26,11 +30,16 @@ export const TodoApp = () => {
         dispatch(action);
     };
 
+    useEffect(() => {
+        if (todos)
+            localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
+
     console.log(todos);
 
     return (
         <>
-            <h1>Toodo App (10) <small>pendientes: 2</small> </h1>
+            <h1>Toodo App ({todos.length}) <small>pendientes: 2</small> </h1>
             <hr />
             <div className="row">
                 <div className="col-7">
