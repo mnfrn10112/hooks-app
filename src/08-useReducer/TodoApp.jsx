@@ -21,7 +21,7 @@ const init = () => {
 export const TodoApp = () => {
     const [todos, dispatch] = useReducer(todoReducer, initialState, init);
 
-    const handelNewTodo = (todo) => {
+    const handleNewTodo = (todo) => {
         console.log(todo);
         const action = {
             type: '[TODO] Add Todo',
@@ -30,9 +30,17 @@ export const TodoApp = () => {
         dispatch(action);
     };
 
-    const handelDeleteTodo = (id) => {
+    const handleDeleteTodo = (id) => {
         const action = {
             type: '[TODO] Remove Todo',
+            payload: id
+        };
+        dispatch(action);
+    };
+
+    const handleToggleTodo = (id) => {
+        const action = {
+            type: '[TODO] Toggle Todo',
             payload: id
         };
         dispatch(action);
@@ -45,19 +53,25 @@ export const TodoApp = () => {
 
     console.log(todos);
 
+    const getDos = () => todos.filter(e => e.done).length;
+
     return (
         <>
-            <h1>Toodo App ({todos.length}) <small>pendientes: 2</small> </h1>
+            <h1>Toodo App ({todos.length}) <small>pendientes: {getDos()}</small> </h1>
             <hr />
             <div className="row">
                 <div className="col-7">
-                    <TodoList todos={todos} onRemove={handelDeleteTodo} />
+                    <TodoList
+                        todos={todos}
+                        onRemove={handleDeleteTodo}
+                        onToggleTodo={handleToggleTodo}
+                    />
                 </div>
                 <div className="col-5">
-                    <h4>Agregar TODO</h4>
+                    <h4> Agregar TODO </h4>
                     <hr />
                     <TodoAdd
-                        onNewTodo={handelNewTodo}
+                        onNewTodo={handleNewTodo}
                     />
                 </div>
             </div>
