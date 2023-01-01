@@ -19,6 +19,11 @@ export const TodoApp = () => {
 
     const handelNewTodo = (todo) => {
         console.log(todo);
+        const action = {
+            type: '[TODO] Add Todo',
+            payload: todo
+        };
+        dispatch(action);
     };
 
     console.log(todos);
