@@ -30,6 +30,14 @@ export const TodoApp = () => {
         dispatch(action);
     };
 
+    const handelDeleteTodo = (id) => {
+        const action = {
+            type: '[TODO] Remove Todo',
+            payload: id
+        };
+        dispatch(action);
+    };
+
     useEffect(() => {
         if (todos)
             localStorage.setItem('todos', JSON.stringify(todos));
@@ -43,7 +51,7 @@ export const TodoApp = () => {
             <hr />
             <div className="row">
                 <div className="col-7">
-                    <TodoList todos={todos} />
+                    <TodoList todos={todos} onRemove={handelDeleteTodo} />
                 </div>
                 <div className="col-5">
                     <h4>Agregar TODO</h4>
