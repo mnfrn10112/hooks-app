@@ -3,11 +3,11 @@ import { TodoAdd, TodoList } from "./";
 
 export const TodoApp = () => {
 
-    const { todos, handleNewTodo, handleDeleteTodo, handleToggleTodo, getDos } = useTodo();
+    const { todos, todosCount, handleNewTodo, handleDeleteTodo, handleToggleTodo, pendingTodosCount } = useTodo();
 
     return (
         <>
-            <h1>Toodo App ({todos.length}) <small>pendientes: {getDos()}</small> </h1>
+            <h1>Toodo App ({todosCount()}) <small>pendientes: {pendingTodosCount()}</small> </h1>
             <hr />
             <div className="row">
                 <div className="col-7">

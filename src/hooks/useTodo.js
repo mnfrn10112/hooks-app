@@ -40,13 +40,15 @@ export const useTodo = () => {
             localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
 
-    const getDos = () => todos.filter(e => !e.done).length;
+    const pendingTodosCount = () => todos.filter(e => !e.done).length;
+    const todosCount = () => todos.length;
 
     return {
         todos,
         handleNewTodo,
         handleDeleteTodo,
         handleToggleTodo,
-        getDos
+        pendingTodosCount,
+        todosCount
     };
 };
